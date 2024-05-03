@@ -8,6 +8,9 @@
 		"MySql1_password": {
 			"value": ""
 		},
+		"MySql2_password": {
+			"value": ""
+		},
 		"minor-work123-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:minor-work123.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
@@ -18,6 +21,15 @@
 			"value": "Hospital1"
 		},
 		"MySql1_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"MySql2_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"MySql2_properties_typeProperties_database": {
+			"value": "hospital2"
+		},
+		"MySql2_properties_typeProperties_username": {
 			"value": "root"
 		},
 		"minor-work123-WorkspaceDefaultStorage_properties_typeProperties_url": {
