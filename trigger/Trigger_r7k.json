@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_r7k",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Hospital2",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2024-05-03T17:43:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
