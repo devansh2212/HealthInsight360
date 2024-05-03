@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "minor-work123"
+		},
+		"MySql1_password": {
+			"value": ""
+		},
+		"minor-work123-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:minor-work123.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"MySql1_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"MySql1_properties_typeProperties_database": {
+			"value": "Hospital1"
+		},
+		"MySql1_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"minor-work123-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://minorwork12.dfs.core.windows.net"
+		}
+	}
+}
