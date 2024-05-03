@@ -8,6 +8,9 @@
 				"pipelineReference": {
 					"referenceName": "HOSPITAL1",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"cw_items": "1"
 				}
 			}
 		],
