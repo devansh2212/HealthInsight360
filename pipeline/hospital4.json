@@ -1,0 +1,151 @@
+{
+	"name": "hospital4",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_wwn",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_wwn",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.tableName}"
+								},
+								{
+									"name": "Destination",
+									"value": "healthinsight//@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "MySqlSource"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_wwn",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_tableName": "@item().source.tableName"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_wwn",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"tableName": "`organizations`"
+						},
+						"destination": {
+							"fileName": "`organizations`.txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "`patients`"
+						},
+						"destination": {
+							"fileName": "`patients`.txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "`payer_transitions`"
+						},
+						"destination": {
+							"fileName": "`payer_transitions`.txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "`payers`"
+						},
+						"destination": {
+							"fileName": "`payers`.txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "`procedures`"
+						},
+						"destination": {
+							"fileName": "`procedures`.txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "`providers`"
+						},
+						"destination": {
+							"fileName": "`providers`.txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "`supplies`"
+						},
+						"destination": {
+							"fileName": "`supplies`.txt"
+						}
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
