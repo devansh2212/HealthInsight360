@@ -86,13 +86,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('workspaceName'), '/HOSPITAL_1')]",
+			"name": "[concat(parameters('workspaceName'), '/Hospital1')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"activities": [
 					{
-						"name": "ForEach_gw5",
+						"name": "ForEach_6uz",
 						"type": "ForEach",
 						"dependsOn": [],
 						"userProperties": [],
@@ -103,7 +103,7 @@
 							},
 							"activities": [
 								{
-									"name": "Copy_gw5",
+									"name": "Copy_6uz",
 									"type": "Copy",
 									"dependsOn": [],
 									"policy": {
@@ -151,7 +151,7 @@
 									},
 									"inputs": [
 										{
-											"referenceName": "SourceDataset_gw5",
+											"referenceName": "SourceDataset_6uz",
 											"type": "DatasetReference",
 											"parameters": {
 												"cw_tableName": "@item().source.tableName"
@@ -160,7 +160,7 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "DestinationDataset_gw5",
+											"referenceName": "DestinationDataset_6uz",
 											"type": "DatasetReference",
 											"parameters": {
 												"cw_fileName": "@item().destination.fileName"
@@ -202,6 +202,110 @@
 								"destination": {
 									"fileName": "`conditions`.txt"
 								}
+							},
+							{
+								"source": {
+									"tableName": "`devices`"
+								},
+								"destination": {
+									"fileName": "`devices`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`encounters`"
+								},
+								"destination": {
+									"fileName": "`encounters`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`imaging_studies`"
+								},
+								"destination": {
+									"fileName": "`imaging_studies`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`immunizations`"
+								},
+								"destination": {
+									"fileName": "`immunizations`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`medications`"
+								},
+								"destination": {
+									"fileName": "`medications`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`observations`"
+								},
+								"destination": {
+									"fileName": "`observations`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`organizations`"
+								},
+								"destination": {
+									"fileName": "`organizations`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`patients`"
+								},
+								"destination": {
+									"fileName": "`patients`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`payer_transitions`"
+								},
+								"destination": {
+									"fileName": "`payer_transitions`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`payers`"
+								},
+								"destination": {
+									"fileName": "`payers`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`procedures`"
+								},
+								"destination": {
+									"fileName": "`procedures`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`providers`"
+								},
+								"destination": {
+									"fileName": "`providers`.txt"
+								}
+							},
+							{
+								"source": {
+									"tableName": "`supplies`"
+								},
+								"destination": {
+									"fileName": "`supplies`.txt"
+								}
 							}
 						]
 					}
@@ -209,8 +313,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/datasets/SourceDataset_gw5')]",
-				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_gw5')]"
+				"[concat(variables('workspaceId'), '/datasets/SourceDataset_6uz')]",
+				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_6uz')]"
 			]
 		},
 		{
@@ -630,6 +734,42 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/DestinationDataset_6uz')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "minor-work123-WorkspaceDefaultStorage",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_fileName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().cw_fileName",
+							"type": "Expression"
+						},
+						"fileSystem": "healthinsight"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/minor-work123-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/DestinationDataset_gw5')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -771,6 +911,34 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/minor-work123-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SourceDataset_6uz')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MySql1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_tableName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "MySqlTable",
+				"schema": [],
+				"typeProperties": {
+					"tableName": {
+						"value": "@dataset().cw_tableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/MySql1')]"
 			]
 		},
 		{
@@ -1059,16 +1227,16 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/Trigger_gw5')]",
+			"name": "[concat(parameters('workspaceName'), '/Trigger_6uz')]",
 			"type": "Microsoft.Synapse/workspaces/triggers",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "HOSPITAL_1",
+							"referenceName": "Hospital1",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -1077,15 +1245,15 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Hour",
+						"frequency": "Minute",
 						"interval": 1,
-						"startTime": "2024-05-02T16:42:00Z",
+						"startTime": "2024-05-06T19:14:00Z",
 						"timeZone": "UTC"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/pipelines/HOSPITAL_1')]"
+				"[concat(variables('workspaceId'), '/pipelines/Hospital1')]"
 			]
 		},
 		{
