@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_6uz",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Hospital1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2024-05-06T19:14:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
