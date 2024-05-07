@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_x68",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "HOSPITAL1_3",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2024-05-07T11:14:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
